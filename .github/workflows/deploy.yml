@@ -15,8 +15,8 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          region: us-east-1
-          registry: 165666738053.dkr.ecr.us-east-1.amazonaws.com
+          registries: |
+            165666738053.dkr.ecr.us-east-1.amazonaws.com
           registry-type: private
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
