@@ -108,4 +108,3 @@ test_script:
   # Run test script
   - npm run test-ci
 version: "{build}"
-#test
