@@ -23,7 +23,7 @@ jobs:
         push: true
         tags: 165666738053.dkr.ecr.us-east-1.amazonaws.com/yashgour:latest
       env:
-        AWS_REGION: <your-aws-region>
+        AWS_REGION: us-east-1
     - name: Deploy to ECS
       uses: hashicorp/terraform-github-actions@master
       with:
