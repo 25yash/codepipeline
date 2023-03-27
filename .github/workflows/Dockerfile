@@ -28,17 +28,17 @@ COPY . .
 # Build the application
 RUN make
 
+# Set the entry point for the container
+ENTRYPOINT ["./app"]
+
+# Define the command to run when the container starts
+CMD ["--help"]
+
 # Push the image to AWS ECR
 ARG ECR_REGISTRY
 ARG ECR_REPOSITORY
 ARG IMAGE_TAG
 
 RUN $(aws ecr get-login --no-include-email --region $AWS_REGION) \
-    && docker tag <your_image_tag> $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+    && docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f codepipeline/.github/workflows/Dockerfile . \
     && docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-# Set the entry point for the container
-ENTRYPOINT ["./app"]
-
-# Define the command to run when the container starts
-CMD ["--help"]
