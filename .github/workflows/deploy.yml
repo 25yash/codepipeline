@@ -39,3 +39,4 @@ jobs:
           registries: 165666738053.dkr.ecr.us-east-1.amazonaws.com
           registry-type: private
           skip-logout: false
+          AWS_SDK_LOAD_CONFIG: 1
