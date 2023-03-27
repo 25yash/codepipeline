@@ -39,6 +39,7 @@ ARG ECR_REGISTRY
 ARG ECR_REPOSITORY
 ARG IMAGE_TAG
 
-RUN $(aws ecr get-login --no-include-email --region $AWS_REGION) \
+# Authenticate with ECR and push the image
+RUN aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY \
     && docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f codepipeline/.github/workflows/Dockerfile . \
     && docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
