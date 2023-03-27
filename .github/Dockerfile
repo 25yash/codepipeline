@@ -17,7 +17,7 @@ ENV AWS_REGION=$AWS_REGION
 WORKDIR /app
 
 # Fetch source code from GitHub
-ARG GITHUB_REPO_URL
+ARG GITHUB_REPO_URL = https://github.com/your/repo.git
 RUN git clone $GITHUB_REPO_URL /app
 
 # Build the application
