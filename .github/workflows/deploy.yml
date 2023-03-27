@@ -11,17 +11,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          registry: 165666738053.dkr.ecr.us-east-1.amazonaws.com
+          registries: 165666738053.dkr.ecr.us-east-1.amazonaws.com
           registry-type: private
+          skip-logout: false
         env:
           AWS_REGION: us-east-1
           AWS_SDK_LOAD_CONFIG: 1
           AWS_CONFIG_FILE: $HOME/.aws/config
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -30,17 +29,6 @@ jobs:
           tags: 165666738053.dkr.ecr.us-east-1.amazonaws.com/yashgour:latest
         env:
           AWS_REGION: us-east-1
-      
-      - name: Login to Amazon ECR again
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry: 165666738053.dkr.ecr.us-east-1.amazonaws.com
-          registry-type: private
-        env:
-          AWS_REGION: us-east-1
-          AWS_SDK_LOAD_CONFIG: 1
-          AWS_CONFIG_FILE: $HOME/.aws/config
-
       - name: Deploy to ECS
         uses: hashicorp/terraform-github-actions@master
         with:
