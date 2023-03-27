@@ -16,12 +16,10 @@ ENV AWS_REGION=$AWS_REGION
 # Set the working directory
 WORKDIR /app
 
-# Fetch source code from GitHub
-ARG GITHUB_REPO_URL = https://github.com/your/repo.git
-RUN git clone $GITHUB_REPO_URL /app
+# Copy the source code to the container
+COPY . /app
 
 # Build the application
-WORKDIR /app
 RUN make build
 
 # Push the image to AWS ECR
