@@ -21,7 +21,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
           registry: ${{ env.ECR_REGISTRY }}
-          registry-type: private
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
