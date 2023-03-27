@@ -23,13 +23,6 @@ jobs:
         with:
           registry: ${{ env.ECR_REGISTRY }}
           registry-type: private
-          skip-logout: false
-        env:
-          AWS_REGION: ${{ env.AWS_REGION }}
-          AWS_SDK_LOAD_CONFIG: 1
-          AWS_CONFIG_FILE: $HOME/.aws/config
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
