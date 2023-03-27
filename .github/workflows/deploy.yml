@@ -46,11 +46,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           ECR_REGISTRY: ${{ env.ECR_REGISTRY }}
           IMAGE_TAG: ${{ env.IMAGE_TAG }}
-
-    secrets:
-      AWS_ACCESS_KEY_ID:
-        description: 'AWS access key'
-        required: true
-      AWS_SECRET_ACCESS_KEY:
-        description: 'AWS secret key'
-        required: true
