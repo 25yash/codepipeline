@@ -17,3 +17,5 @@ help:
     @echo "  build: Build the application"
     @echo "  clean: Remove the executable"
     @echo "  help:  Show this help message"
+
+.PHONY: build clean help
