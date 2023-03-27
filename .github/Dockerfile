@@ -3,6 +3,8 @@ FROM alpine:latest
 
 # Install necessary dependencies
 RUN apk add --no-cache curl git make
+RUN apk add --no-cache make
+
 
 # Set AWS credentials and region
 ARG AWS_ACCESS_KEY_ID
