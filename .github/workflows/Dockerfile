@@ -2,7 +2,7 @@
 FROM alpine:latest
 
 # Install necessary dependencies
-RUN apk add --no-cache curl git
+RUN apk add --no-cache curl git make
 
 # Set AWS credentials and region
 ARG AWS_ACCESS_KEY_ID
@@ -13,22 +13,16 @@ ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 ENV AWS_REGION=$AWS_REGION
 
-# Install the AWS CLI
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && ./aws/install \
-    && rm -rf awscliv2.zip
-
 # Set the working directory
 WORKDIR /app
 
 # Fetch source code from GitHub
-ARG https://github.com/25yash/codepipeline
-
+ARG GITHUB_REPO_URL
 RUN git clone $GITHUB_REPO_URL /app
 
 # Build the application
-RUN make
+WORKDIR /app
+RUN make build
 
 # Push the image to AWS ECR
 ARG ECR_REGISTRY
@@ -39,7 +33,7 @@ RUN $(aws ecr get-login --no-include-email --region $AWS_REGION) \
     && docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 
 # Define the entry point for the container
-ENTRYPOINT [ "executable" ]
+ENTRYPOINT [ "/app/executable" ]
 
 # Define the command to run when the container starts
 CMD [ "default-arg" ]
