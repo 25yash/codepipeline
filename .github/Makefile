@@ -1,7 +1,19 @@
-# Define variables
-DOCKER_BUILD_CMD = docker build -t my-image .
+# Define the default target
+.DEFAULT_GOAL := build
 
-# Define targets and dependencies
-.PHONY: build
+# Define the build target
 build:
-    $(DOCKER_BUILD_CMD)
+    @echo "Building the application..."
+    go build -o executable
+
+# Define the clean target
+clean:
+    @echo "Cleaning up..."
+    rm -f executable
+
+# Define the help target
+help:
+    @echo "Available targets:"
+    @echo "  build: Build the application"
+    @echo "  clean: Remove the executable"
+    @echo "  help:  Show this help message"
