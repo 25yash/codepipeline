@@ -26,7 +26,7 @@ WORKDIR /app
 COPY . .
 
 # Build the application
-#RUN make
+RUN make
 
 # Set the entry point for the container
 ENTRYPOINT ["./app"]
